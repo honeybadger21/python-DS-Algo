@@ -528,10 +528,24 @@ class Solution:
 
 # 31 - Intersection of Two Linked Lists 
 
-# 32 - Missing Ranges [Premium, Locked]
+# 32 - Number of 1 Bits 
 
-# 33 - Reverse Bits Number of 1 Bits 
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        return bin(n).count('1')
+    
+# 33 - Reverse Bits 
 
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        
+        ans = 0
+        
+        for i in range(32):
+            ans = ans << 1
+            ans |= (n >> i) & 0x1
+        return ans
+             
 # 34 - Happy Number 
 
 # 35 - Reverse Linked List 
