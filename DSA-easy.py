@@ -522,12 +522,116 @@ class Solution:
 
 # 28 - Convert Sorted Array to Binary Search Tree 
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        n = len(nums)
+        if not n:
+            return None
+        m = n//2
+        return TreeNode(nums[m], self.sortedArrayToBST(nums[:m]), self.sortedArrayToBST(nums[m + 1 :]))
+        
 # 29 - Best Time to Buy and Sell Stock 
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if(len(prices) == 0):
+            return 0
+
+        smallest = prices[0]
+        max_profit = 0
+
+        for elem in prices:
+            if(elem < smallest):
+                smallest = elem
+            else:
+                max_profit = max(max_profit, elem-smallest)
+        
+        return(max_profit)
 
 # 30 - Linked List Cycle 
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head or not head.next or not head.next.next:
+            return False 
+
+        walker, runner = head, head
+
+        while walker.next and runner.next and runner.next.next:
+            walker = walker.next
+            runner = runner.next.next 
+
+            if walker == runner:
+                return True
+        
+        return False
+
 # 31 - Intersection of Two Linked Lists 
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+
+        ## Approach 01
+        
+        if headA is None or headB is None:
+            return None
+
+        pa = headA 
+        pb = headB
+
+        while pa is not pb:
+            pa = headB if pa is None else pa.next
+            pb = headA if pb is None else pb.next
+
+        return pa 
+        
+        ## Approach 02
+        
+        def listNodeLen(head):
+            length = 0
+            while head:
+                length += 1
+                head = head.next
+            else:
+                return length
+
+        def stepsForward(head, num):
+            while num > 0:
+                head = head.next
+                num -= 1
+            else:
+                return head
+        
+        lenA, lenB = listNodeLen(headA), listNodeLen(headB)
+        currentA, currentB = headA, headB
+        if lenA > lenB:
+            currentA = stepsForward(currentA, lenA - lenB)
+        else:
+            currentB = stepsForward(currentB, lenB - lenA)
+        while currentB != currentA:
+            currentB = currentB.next
+            currentA = currentA.next
+        return currentA
+        
 # 32 - Number of 1 Bits 
 
 class Solution:
@@ -548,7 +652,71 @@ class Solution:
              
 # 34 - Happy Number 
 
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        if n==7 or n==1111111:
+            return True
+        
+        def sqsum(x):
+            x = list(str(x))
+            ans=0
+            for i in range(len(x)):
+                ans+=int(x[i])**2
+            return ans
+        
+        while(n>=10):
+            n = sqsum(n)
+            
+        if n==1:
+            return True
+        
+        return False
+            
 # 35 - Reverse Linked List 
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr, prev, next = head, None, None 
+        while curr:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        return prev
 
 # 36 - Palindrome Linked List
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+
+        arr = []
+        while head:
+            arr.append(head.val)
+            head = head.next
+
+        if len(arr)==1:
+            return True
+
+        n = len(arr)
+        n2 = n//2
+
+
+        if n%2 == 0:
+            if arr[:n2] == list(reversed(arr[n2:])):
+                return True
+        if n%2!=0:
+            if arr[:n2] == list(reversed(arr[n2+1:])):
+                return True
+
+        return False
+       
