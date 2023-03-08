@@ -289,10 +289,45 @@ class Solution:
             temp.next = temp = ListNode(val)        
         return res.next
     
-# 
+# 05. Longest Palindromic Substring
+# Given a string s, return the longest palindromic substring in s.
 
-   
-            
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+
+        # Brute Force
+        all = []
+        for i in range(len(s)):
+            for j in range(i, len(s)):
+                # [::-1] is for reversing
+                if s[i:j+1] == s[i:j+1][::-1]:
+                    all.append(s[i:j+1])
+        max_len = 0
+        for elem in all:
+            max_len = max(max_len, len(elem))
+        for elem in all:
+            if len(elem) == max_len:
+                return elem
+
+        # Dynamic Programming
+
+        dp = [[False]*len(s) for _ in range(len(s))]
+        for i in range(len(s)):
+            dp[i][i] = True
+        ans = s[0]
+        for j in range(len(s)):
+            for i in range(j):
+                if s[i] == s[j] and (dp[i+1][j-1] or j == i+1):
+                    dp[i][j] = True
+                    if j-i+1 > len(ans):
+                        ans = s[i:j+1]
+        return ans
+
+    # 07. Reverse Integer
+    
+
+        
+        
 
 
             
