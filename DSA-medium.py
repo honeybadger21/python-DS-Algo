@@ -340,9 +340,29 @@ class Solution:
             x = -x
         return x if (x >= -2**31) and (x <= (2**31)-1) else 0
     
+# 08. String to Integer (atoi)
 
-        
-        
+class Solution:
+    def myAtoi(self, str: str) -> int:
+        str = str.strip()
+        if not str:
+            return 0
+        sign = -1 if str[0] == '-' else 1
+        str = str[1:] if str[0] in ['-', '+'] else str
+        res = 0
+        for char in str:
+            if not char.isdigit():
+                break
+            res = res * 10 + int(char)
+            if res * sign >= 2**31 - 1:
+                return 2**31 - 1
+            if res * sign <= -2**31:
+                return -2**31
+        return res * sign
+           
+# 17. Letter Combinations of a Phone Number
+# Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+# A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
 
 
             
