@@ -544,5 +544,52 @@ class Solution:
 
         return [-1, -1]
 
+# 98. Validate Binary Search Tree
+# Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+
+# A valid BST is defined as follows:
+# The left subtree of a node contains only nodes with keys less than the node's key. 
+# The right subtree of a node contains only nodes with keys greater than the node's key.
+# Both the left and right subtrees must also be binary search trees.
+    
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+
+        # In the case of binary search trees (BST), Inorder traversal gives nodes in non-decreasing order --> Using that logic here 
+
+        def inorderTraversal(root, res=[]):
+            if root:
+                res = inorderTraversal(root.left)
+                res.append(root.val)
+                res = inorderTraversal(root.right)
+            return res
+
+        arr = inorderTraversal(root)
+
+        for i in range(len(arr)-1): # for cases where equal value of parent and node exist that will violate BST
+            if arr[i]==arr[i+1]:
+                return False
+                
+        if arr == sorted(arr):
+            return True
+        return False
+
+
+
+
+
+
+
+
+
+
+    
+
 
 
