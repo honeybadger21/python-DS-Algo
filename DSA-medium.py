@@ -492,9 +492,14 @@ class Solution:
 
         ### Can also use logs as the division will become subtraction in the case of log ###
 
+# 22. Generate Parentheses
+# Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
-
-
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        if n==0:
+            return ['']
+        return ['(' + left + ')' + right for i in range(n) for left in self.generateParenthesis(i) for right in self.generateParenthesis(n-i-1)]
 
 
 
