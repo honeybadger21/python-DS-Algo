@@ -501,10 +501,48 @@ class Solution:
             return ['']
         return ['(' + left + ')' + right for i in range(n) for left in self.generateParenthesis(i) for right in self.generateParenthesis(n-i-1)]
 
+# 34. Find First and Last Position of Element in Sorted Array
+# Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value. If target is not found in the array, return [-1, -1].
 
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+       
+        i, j = 0, len(nums)-1
+        arr = []
+        while i<=j:
+            if nums[i]==target:
+                arr.append(i)
+            if nums[j]==target:
+                arr.append(j)
+            
+            i+=1
+            j-=1
 
+        if arr == []:
+            return [-1, -1]
+        arr = sorted(arr)
+        ans = [arr[0], arr[-1]]
+        return ans
+    
+        # Binary Search O(logn) Approach
 
+        def search(x):
+            lo, hi = 0, len(nums)
+            while lo < hi:
+                mid = (lo+hi)//2
+                if nums[mid]<x:
+                    lo=mid+1
+                else:
+                    hi=mid
+            return lo
 
+        lo = search(target)
+        hi = search(target+1)-1
+
+        if lo<=hi:
+            return [lo, hi]
+
+        return [-1, -1]
 
 
 
