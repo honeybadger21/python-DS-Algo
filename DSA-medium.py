@@ -436,15 +436,61 @@ class Solution:
         node.next = node.next.next        
         return head
     
-    
+# 29. Divide Two Integers
+# Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
 
+ class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
 
+        ### Repeated Subtraction Solution ###
+        
+        # Calculate sign of divisor i.e., sign will be negative only if either one of them is negative otherwise it will be positive
+        sign = -1 if ((dividend < 0) ^ (divisor < 0)) else 1
+
+        # Update both divisor and dividend positive
+        dividend, divisor = abs(dividend), abs(divisor)
+        
+        # Initialize the quotient
+        quotient = 0 # it's just a counter basically
+        while (dividend >= divisor):
+            dividend -= divisor
+            quotient += 1
+
+        # if the sign value computed earlier is -1 then negate the value of quotient
+        if sign == -1:
+            quotient = -quotient
  
+        return quotient
 
 
+        if dividend == -2147483648 and divisor == -1:
+            return 2147483647
 
-            
+        ### Efficient solution using Bit Manipulation ###
+    
+        # Calculate sign of divisor i.e., sign will be negative either one of them is negative only if otherwise it will be positive
+        sign = (-1 if((dividend < 0) ^ (divisor < 0)) else 1)
+     
+        # remove sign of operands
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+     
+        # Initialize the quotient
+        quotient = 0
+        temp = 0
+     
+        # test down from the highest bit and accumulate the tentative value for valid bit
+        for i in range(31, -1, -1):
+            if (temp + (divisor << i) <= dividend):
+                temp += divisor << i
+                quotient |= 1 << i
 
+        # if the sign value computed earlier is -1 then negate the value of quotient
+        if sign ==-1:
+            quotient=-quotient
+        return quotient
+
+        ### Can also use logs as the division will become subtraction in the case of log ###
 
 
 
