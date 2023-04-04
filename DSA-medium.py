@@ -705,4 +705,42 @@ class Solution:
         
         return q
 
+    
+# 56. Merge Intervals
+# Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, 
+# and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+
+        def check_to_merge(l1, l2): 
+            # l1 is list1, l2 is list2
+            m = []
+            if l1[-1]>=l2[0] and l1[-1]<=l2[-1]:
+                m = [min(l2[0], l1[0]), l2[-1]]
+
+            if l1[-1]==l2[0]:
+                m = [l1[0], l2[-1]]
+
+            if l1[-1]>=l2[0] and l1[-1]>=l2[-1]:
+                m = [min(l2[0], l1[0]), l1[-1]]
+
+            return m
+
+        i = 0
+        intervals = sorted(intervals)
+        while i < len(intervals)-1:
+            p, q = intervals[i], intervals[i+1]
+            k = check_to_merge(p, q)
+            if k!= []:
+                intervals[i]=k
+                intervals.pop(i+1)
+            else:
+                i+=1
+        
+        return intervals
+            
+
+
+
             
