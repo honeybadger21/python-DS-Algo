@@ -740,7 +740,23 @@ class Solution:
         
         return intervals
             
+# 3. Longest Substring Without Repeating Characters
+# Given a string s, find the length of the longest substring without repeating characters.
 
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
 
+        sub, count = "", 0
+        for i in range(len(s)):
+            if s[i] not in sub:
+                sub+=s[i]
+                count = max(count, len(sub))
+               
+            else:
+                for j in range(len(sub)):
+                    if s[i] == sub[j]:
+                        sub = sub[j+1:]+s[i]
+                        break
+                count = max(count, len(sub))
 
-            
+        return count   
