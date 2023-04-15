@@ -789,6 +789,72 @@ class Solution:
         
         # If all characters have a frequency greater than or equal to k, return the length of the string
         return len(s)
+    
+# 36. Valid Sudoku
+# Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+#    Each row must contain the digits 1-9 without repetition.
+#    Each column must contain the digits 1-9 without repetition.
+#    Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+        # check for reps in rows 
+
+        for x in range(len(board)):
+            hsh={}
+            for y in range(len(board)):
+                if board[x][y] in hsh and board[x][y] != ".":
+                    #print(hsh, "1")
+                    return False
+                elif board[x][y] not in hsh:
+                    hsh[board[x][y]]=1 
+
+        # check for reps in cols
+
+        for x in range(len(board)):
+            hsh={}
+            for y in range(len(board)):
+                if board[y][x] in hsh and board[y][x] != ".":
+                    #print(hsh,"2", board[y][x])
+                    return False
+                elif board[y][x] not in hsh:
+                    hsh[board[y][x]]=1        
+
+        # check for reps in 3x3
+
+        def square(m, n):
+            #print("okay")
+            hsh={}
+            for x in range(m, m+3):
+                for y in range(n, n+3):
+                    if board[x][y] in hsh and board[x][y] != ".":
+                        #print("3", hsh)
+                        return False
+                    elif board[x][y] not in hsh:   
+                        hsh[board[x][y]]=1
+        
+        if square(0, 0) is False:
+            return False
+        if square(3, 3) is False:
+            return False
+        if square(6, 6) is False:
+            return False
+        if square(0, 3) is False:
+            return False
+        if square(0, 6) is False:
+            return False
+        if square(3, 0) is False:
+            return False
+        if square(6, 0) is False:
+            return False
+        if square(3, 6) is False:
+            return False
+        if square(6, 3) is False:
+            return False
+
+        return True
+
 
         
 
