@@ -889,9 +889,22 @@ class Solution:
         return int(log(exp(a)*exp(b))) if a!=0 and b!=0 else a or b
         
         
-        
-        
-        
+# 128. Longest Consecutive Sequence
+# Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+          
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        max_len, num_set = 0, set(nums)
+        for num in nums:
+            if num-1 not in num_set:
+                curr_num = num
+                curr_len = 1
+                
+                while curr_num+1 in num_set:
+                    curr_num+=1
+                    curr_len+=1
+                max_len = max(max_len, curr_len)
+        return max_len
         
         
         
