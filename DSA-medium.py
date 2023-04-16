@@ -1043,4 +1043,27 @@ class Solution:
         
         return binom(m + n - 2, min(m - 1, n - 1))
 
+# 279. Perfect Squares 
+# Given an integer n, return the least number of perfect square numbers that sum to n.
+# A perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself. 
+# For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.
+
+class Solution:
+    def numSquares(self, n: int) -> int:
+
+        # DP Solution
+        inf = sys.maxsize
+        dp = [inf for _ in range(n+1)]
+        dp[0], root = 0, 1
+        sq = root*root
+
+        # for each sq no. 1, 4, 9, 16, ... 
+        while (sq<=n):
+            for i in range(sq, n+1):
+                dp[i] = min(dp[i], dp[i-sq]+1)
+            root += 1
+            sq = root*root
+        print(dp)
+        return dp[n]
+        
 
