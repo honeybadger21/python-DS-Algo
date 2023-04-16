@@ -1017,4 +1017,30 @@ class Solution:
                 last_position = i
         return last_position == 0
 
+# 62. Unique Paths
+# There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). 
+# The robot can only move either down or right at any point in time.
+# Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+
+        """To get from the top left corner to the bottom right corner, the robot has to move, in some order, m - 1 squares down and n - 1 squares to the right. 
+	There is a one-to-one correspondence with the set of all possible paths and the set of instructions to follow these paths. 
+	An easy way to give instructions is to tell the robot at each step if they need to move down or to the right, 
+	so the problem is equivalent to figuring out in how many ways we can rearrange the letters of the word DDDDD...DDDRRRR...RR that has exactly m - 1 Ds and n - 1 Rs. 
+	This can be done in exactly binom((m - 1) + (n - 1), n - 1) different ways, 
+	where binom(n, k) = n! / (k! * (n - k)!)."""
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+	
+		# recursive definition of binom(n, k)
+        def binom(n, k) -> int:
+            if k == 0:
+                return 1
+            return (n - k + 1) * binom(n, k - 1) // k
+        
+        return binom(m + n - 2, min(m - 1, n - 1))
+
 
