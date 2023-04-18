@@ -15,10 +15,10 @@ def printSubsequences(arr, index, subarr):
 			print(subarr)
 	
 	else:
-		# Subsequence without including the element at current index
+		# Subsequence without including the element at current index --> the choice where you don't add the element to result
 		printSubsequences(arr, index + 1, subarr)
 		
-		# Subsequence including the element at current index
+		# Subsequence including the element at current index --> the choice where you do add the element to result
 		printSubsequences(arr, index + 1, subarr+[arr[index]])
 	
 	return
