@@ -32,3 +32,13 @@ printSubsequences(arr, 0, [])
 ##############
 
 # 1 2 3, 1 2, 1 3, 1, 2 3, 2, 3, {}
+
+def createTree(arr, idx, subarr):
+	# Base Case
+	if idx == len(arr):
+		return subarr
+            
+	else:
+		return hsh.append(createTree(arr, idx+1, subarr)), hsh.append(createTree(arr, idx+1, subarr+[arr[idx]]))
+       
+createTree(s, 0, [])
