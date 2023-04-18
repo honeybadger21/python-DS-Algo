@@ -19,8 +19,7 @@ def printSubsequences(arr, index, subarr):
 		printSubsequences(arr, index + 1, subarr)
 		
 		# Subsequence including the element at current index
-		printSubsequences(arr, index + 1,
-							subarr+[arr[index]])
+		printSubsequences(arr, index + 1, subarr+[arr[index]])
 	
 	return
 		
