@@ -2,40 +2,34 @@
 ### Recursion ###
 #################
 
-# Recursive function to print all possible subarrays
-# for given array
-def printSubArrays(arr, start, end):
-     
-    # Stop if we have reached the end of the array   
-    if end == len(arr):
-        return
-     
-    # Increment the end point and start from 0
-    elif start > end:
-        return printSubArrays(arr, 0, end + 1)
-         
-    # Print the subarray and increment the starting point
-    else:
-        print(arr[start:end + 1])
-        return printSubArrays(arr, start + 1, end)
-     
-#################
-### Iteration ###
-#################
+# Python3 code to print all possible subsequences for given array using recursion
 
-# Prints all subarrays in arr[0..n-1]
-def subArray(arr, n):
-  
-    # Pick starting point
-    for i in range(0,n):
-  
-        # Pick ending point
-        for j in range(i,n):
-  
-            # Print subarray between
-            # current starting
-            # and ending points
-            for k in range(i,j+1):
-                print (arr[k],end=" ")
-  
-            print ("\n",end="")
+# Recursive function to print all possible subsequences for given array
+def printSubsequences(arr, index, subarr):
+	
+	# Print the subsequence when reach the leaf of recursion tree
+	if index == len(arr):
+		
+		# Condition to avoid printing empty subsequence
+		if len(subarr) != 0:
+			print(subarr)
+	
+	else:
+		# Subsequence without including the element at current index
+		printSubsequences(arr, index + 1, subarr)
+		
+		# Subsequence including the element at current index
+		printSubsequences(arr, index + 1,
+							subarr+[arr[index]])
+	
+	return
+		
+arr = [1, 2, 3]
+
+printSubsequences(arr, 0, [])
+
+##############
+### Output ###
+##############
+
+# 1 2 3, 1 2, 1 3, 1, 2 3, 2, 3, {}
