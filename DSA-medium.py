@@ -1131,3 +1131,19 @@ class Solution:
                 max_profit += prices[i] - prices[i-1]
         return max_profit
 
+# 131. Palindrome Partitioning
+# Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        ans = []
+        if len(s) == 0:
+            return [[]]
+        for i in range(1, len(s)+1):
+            if s[:i] != s[:i][::-1]:
+                continue
+            cur = self.partition(s[i:])
+            for j in range(len(cur)):
+                ans.append([s[:i]]+cur[j])
+
+        return ans
