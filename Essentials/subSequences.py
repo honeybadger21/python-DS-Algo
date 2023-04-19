@@ -42,3 +42,35 @@ def createTree(arr, idx, subarr):
 		return hsh.append(createTree(arr, idx+1, subarr)), hsh.append(createTree(arr, idx+1, subarr+[arr[idx]]))
        
 createTree(s, 0, [])
+
+
+# this will work if no repition was allowed :P
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        
+        hsh = []
+        def createTree(arr, idx, subarr):
+            if idx == len(arr):
+                return subarr
+            else:
+                return hsh.append(createTree(arr, idx+1, subarr)), hsh.append(createTree(arr, idx+1, subarr+[arr[idx]]))
+       
+        createTree(wordDict, 0, [])
+        ans = []
+        for elem in hsh:
+            if elem!=None:
+                if len(elem)>0:
+                    temp=''
+                    for elem2 in elem:
+                        if elem2 != None:
+                            temp+=elem2
+                    ans.append(temp)
+                else:
+                    ans.append(elem)
+            
+        print(ans)
+
+        if s in ans:
+            return True
+        return False
