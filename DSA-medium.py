@@ -1147,3 +1147,33 @@ class Solution:
                 ans.append([s[:i]]+cur[j])
 
         return ans
+
+# 139. Word Break
+# Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
+# Note that the same word in the dictionary may be reused multiple times in the segmentation.
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        '''  
+	
+	# A very Pythonic way to do it
+	
+        ok = [True]
+        for i in range(1, len(s)+1):
+            ok += any(ok[j] and s[j:i] in wordDict for j in range(i)),
+        return ok[-1]
+        '''
+	
+        word_set = set(wordDict) # convert wordDict to a set for constant time lookup
+        n = len(s) 
+
+        dp = [False]*(n+1) # create an array dp of length n+1
+        dp[0] = True # empty string can be segmented into an empty sequence of words
+
+        for i in range(1, n+1):
+            for j in range(i):
+                if dp[j] and s[j:i] in word_set:
+                    dp[i] = True
+                    break
+        
+        return dp[n]  
