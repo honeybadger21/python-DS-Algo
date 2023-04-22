@@ -1282,3 +1282,42 @@ class Solution:
             even = even.next
         odd.next = evenhead
         return head
+
+# 138. Copy List with Random Pointer (what a great question, fun)
+# A linked list of length n is given such that each node contains an additional random pointer, which could point to any node in the list, or null.
+# Construct a deep copy of the list. The deep copy should consist of exactly n brand new nodes, 
+# where each new node has its value set to the value of its corresponding original node. 
+# Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and 
+# copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.
+
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def __init__(self):
+        self.visited = {}
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        # if we have already processed the current node, return the cloned version of it
+        if head in self.visited:
+            return self.visited[head]
+        
+        # create a new node with the same value as the original node 
+        node = Node(head.val, None, None)
+
+        # save the new node in visited dictionary
+        self.visited[head] = node
+
+        # recursively copy the next and random pointers 
+        node.next = self.copyRandomList(head.next)
+        node.random = self.copyRandomList(head.random)
+
+        return node
