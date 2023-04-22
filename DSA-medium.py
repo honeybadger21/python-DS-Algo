@@ -1215,3 +1215,41 @@ class Solution:
             dp[i] = 1+maxi
 
         return max(dp)     
+
+# 166. Fraction to Recurring Decimal
+# Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.
+# If the fractional part is repeating, enclose the repeating part in parentheses.
+# If multiple answers are possible, return any of them.
+# It is guaranteed that the length of the answer string is less than 104 for all the given inputs.
+
+class Solution:
+    def fractionToDecimal(self, numerator: int, denominator: int) -> str:
+        # Get sign
+        negative = numerator * denominator < 0
+        numerator, denominator = abs(numerator), abs(denominator)
+        
+        # First division
+        quotient, remainder = divmod(numerator, denominator)
+        remainders = {}
+        res = [str(quotient)]
+        
+        # If not divided exactly, repeat until remainder is zero or loop
+        i = 0
+        while remainder != 0 and remainder not in remainders:
+            remainders[remainder] = i
+            quotient, remainder = divmod(remainder * 10, denominator)
+            res.append(str(quotient))
+            i += 1
+        
+        # Add sign
+        if negative:
+            res[0] = '-' + res[0]
+        
+        # Return result
+        if remainder == 0:
+            if len(res) == 1:
+                return res[0]
+            else:
+                return res[0] + '.' + ''.join(res[1:])
+
+        return res[0] + '.' + ''.join(res[1:remainders[remainder] + 1]) + '(' + ''.join(res[remainders[remainder] + 1:]) + ')'
