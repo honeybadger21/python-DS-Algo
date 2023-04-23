@@ -1403,7 +1403,27 @@ class Solution:
                 return True
         return False
 
+# 324. Wiggle Sort II
+# Given an integer array nums, reorder it such that nums[0] < nums[1] > nums[2] < nums[3]....
+# You may assume the input array always has a valid answer.
         
+class Solution:
+    def wiggleSort(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        nums.sort()
+        mid = (n - 1) // 2
+        nums[::2], nums[1::2] = nums[mid::-1], nums[:mid:-1]
 
+        '''
+        nums=sorted(nums)
+        i,j=1,len(nums)-1
+        while i<j:
+            nums[i], nums[j] = nums[j], nums[i]
+            i+=2
+            j-=1
+        '''
         
 
