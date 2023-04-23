@@ -1353,10 +1353,27 @@ class LRUCache:
             if len(self.odict)>self.capacity:
                 self.odict.popitem(last=False)
             
-
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
 # obj.put(key,value)
 
+# 384. Shuffle an Array
+# Given an integer array nums, design an algorithm to randomly shuffle the array. 
+# All permutations of the array should be equally likely as a result of the shuffling.
+
+class Solution:
+
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+        self.original = list(nums)
+
+    def reset(self) -> List[int]:
+        return self.original
+
+    def shuffle(self) -> List[int]:
+        for i in range(len(self.nums)):
+            j = random.randrange(i, len(self.nums))
+            self.nums[i], self.nums[j] = self.nums[j], self.nums[i]
+        return self.nums
 
