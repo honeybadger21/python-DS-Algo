@@ -1377,3 +1377,33 @@ class Solution:
             self.nums[i], self.nums[j] = self.nums[j], self.nums[i]
         return self.nums
 
+# 334. Increasing Triplet Subsequence
+# Given an integer array nums, return true if there exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k]. 
+# If no such indices exists, return false.
+
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        arr = []
+        for elem in nums:
+            if elem not in arr:
+                arr.append(elem)
+        if len(arr) < 3:
+            return False
+        # if len(nums) in [0, 1, 2]:
+            # return False
+        if nums == sorted(nums)[::-1]:
+            return False
+        # if max(nums)==min(nums):
+            # return False
+        if sorted(nums)==nums: # and max(nums)!=min(nums) and max(nums)!=nums[len(nums)//2]:
+            return True
+        for idx in range(1, len(nums)-1):
+            #print(nums[:idx], nums[idx], nums[idx+1:])
+            if nums[idx] > min(nums[:idx]) and nums[idx] < max(nums[idx+1:]):
+                return True
+        return False
+
+        
+
+        
+
