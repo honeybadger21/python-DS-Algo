@@ -1426,4 +1426,31 @@ class Solution:
             j-=1
         '''
         
+# 179. Largest Number
+# Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.
+# Since the result may be very large, so you need to return a string instead of an integer.
 
+class Solution:
+
+    def largestNumber(self, nums: List[int]) -> str:
+        nums = list(map(str, nums)) # convert all elements to string
+        def merge(l, h):
+            if l == h: return [nums[l]]
+            m = (l+h)//2
+            d1 = merge(l, m)
+            d2 = merge(m+1, h)
+            res, l1, l2, i, j = [], len(d1), len(d2), 0, 0
+
+            while i<l1 and j<l2:
+                if d1[i]+d2[j] > d2[j]+d1[i]:
+                    res.append(d1[i])
+                    i+=1
+                else:
+                    res.append(d2[j])
+                    j+=1
+            if i == l1: res+= d2[j::]
+            else: res+=d1[i::]
+
+            return res
+    
+        return str(int("".join(merge(0, len(nums)-1))))
