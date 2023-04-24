@@ -1,3 +1,7 @@
+# Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+# The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. 
+# The same letter cell may not be used more than once.
+
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         for x in range(len(board)):
@@ -22,3 +26,4 @@ class Solution:
         board[x][y] = word[index]
         return found
 
+# https://leetcode.com/problems/word-search/description/ 
