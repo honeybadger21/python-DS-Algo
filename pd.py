@@ -53,13 +53,17 @@ def fillMissingValues(products: pd.DataFrame) -> pd.DataFrame:
 def concatenateTables(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
     return pd.concat([df1, df2])
 
+# 2889. Reshape Data: Pivot
+def pivotTable(weather: pd.DataFrame) -> pd.DataFrame:
+    return weather.pivot(index='month', columns='city', values='temperature')
 
+# 2890. Reshape Data: Melt
+def meltTable(report: pd.DataFrame) -> pd.DataFrame:
+    return report.melt(id_vars=['product'],
+                       value_vars=['quarter_1', 'quarter_2', 'quarter_3', 'quarter_4'],
+                       var_name="quarter",
+                       value_name="sales")
 
-
-
-
-
-
-
-
-
+# 2891. Method Chaining
+def findHeavyAnimals(animals: pd.DataFrame) -> pd.DataFrame:
+    return animals[animals.weight>100][['name', 'weight']].sort_values(by = 'weight', ascending=False)[['name']]
