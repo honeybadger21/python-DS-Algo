@@ -8,3 +8,6 @@ def createDataframe(student_data: List[List[int]]) -> pd.DataFrame:
 def getDataframeSize(players: pd.DataFrame) -> List[int]:
     return list(players.shape)
 
+# 2879. Display the First Three Rows
+def selectFirstRows(employees: pd.DataFrame) -> pd.DataFrame:
+    return employees[:3]
