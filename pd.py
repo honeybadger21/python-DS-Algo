@@ -28,3 +28,38 @@ def dropDuplicateEmails(customers: pd.DataFrame) -> pd.DataFrame:
 # 2883. Drop Missing Data
 def dropMissingData(students: pd.DataFrame) -> pd.DataFrame:
     return students.dropna(subset=['name'])
+
+# 2884. Modify Columns
+def modifySalaryColumn(employees: pd.DataFrame) -> pd.DataFrame:
+    employees['salary'] = employees['salary']*2
+    return employees
+
+# 2885. Rename Columns
+def renameColumns(students: pd.DataFrame) -> pd.DataFrame:
+    students.columns = ['student_id', 'first_name', 'last_name', 'age_in_years']
+    return students
+
+# 2886. Change Data Type
+def changeDatatype(students: pd.DataFrame) -> pd.DataFrame:
+    students.grade = students.grade.astype(int)
+    return students
+
+# 2887. Fill Missing Data
+def fillMissingValues(products: pd.DataFrame) -> pd.DataFrame:
+    products.quantity.fillna(0, inplace=True)
+    return products
+
+# 2888. Reshape Data: Concatenate
+def concatenateTables(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
+    return pd.concat([df1, df2])
+
+
+
+
+
+
+
+
+
+
+
