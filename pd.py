@@ -11,3 +11,7 @@ def getDataframeSize(players: pd.DataFrame) -> List[int]:
 # 2879. Display the First Three Rows
 def selectFirstRows(employees: pd.DataFrame) -> pd.DataFrame:
     return employees[:3]
+
+# 2880. Select Data
+def selectData(students: pd.DataFrame) -> pd.DataFrame:
+    return students[students.student_id == 101][['name', 'age']]
